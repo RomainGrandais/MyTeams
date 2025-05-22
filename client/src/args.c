@@ -1,0 +1,44 @@
+/*
+** EPITECH PROJECT, 2024
+** B-NWP-400-REN-4-1-myftp-hugues.lejeune [WSL: Ubuntu]
+** File description:
+** args
+*/
+
+#include "args.h"
+
+bool verify_help_arg(const char *arg)
+{
+    int cmp = strcmp(arg, "-help");
+
+    if (cmp != 0) {
+        cmp = strcmp(arg, "-h");
+        if (cmp != 0)
+            return false;
+    }
+    return true;
+}
+
+bool get_port(const char *port_str, client_t *client)
+{
+    size_t port_len = strlen(port_str);
+
+    for (size_t i = 0; i < port_len; i++) {
+        if (port_str[i] < '0' || port_str[i] > '9') {
+            printf("Invalid port: %s\n", port_str);
+            return false;
+        }
+    }
+    client->con_port = atoi(port_str);
+    return true;
+}
+
+bool get_ip_address(const char *ip_str, client_t *client)
+{
+    client->con_ip = inet_addr(ip_str);
+    if (client->con_ip == (in_addr_t)(-1)) {
+        printf("Invalid ip address: %s\n", ip_str);
+        return false;
+    }
+    return true;
+}

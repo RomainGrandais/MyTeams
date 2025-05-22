@@ -1,0 +1,11 @@
+coding-style-reports.log
+*.a
+*.o
+a.out
+vgcore*
+build
+tmp
+.vscode
+myteams_server
+myteams_cli
+/storage/TmpDatabase.db
